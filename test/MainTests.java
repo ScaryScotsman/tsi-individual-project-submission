@@ -63,21 +63,19 @@ class MainTests{
     }
 
     @Test
-    void dealHandTest(){
-        Player testPlayer = new Player("Bishop");
-        List testCardDeck = Main.generateDeck();
-        testCardDeck = Main.removeQueens(testCardDeck);
-
-        Main.dealHand(testPlayer, testCardDeck, (testCardDeck.size() / testNoOfPlayers));
-
-        assertEquals((testCardDeckSizeAfterRemovalOfQueen/ testNoOfPlayers),testPlayer.getHand().size());
+    void playPairTest(){
+        assertEquals(testComparisonHand, testHumanPlayer.playPair());
     }
 
     @Test
-    void removeQueensTest(){
-        List cardDeck =  Main.generateDeck();
+    void viewOtherPlayersHandTest(){
+        assertEquals("Bishop currently has 2 cards.",testHumanPlayer.viewOpponentsHand(testCPU));
+    }
 
-        assertEquals(53, Main.removeQueens(cardDeck).size());
-        assertEquals(1, CommonMethods.stringCount(Main.removeQueens(cardDeck).toString(), 'Q'));
+    @Test
+    void chooseOpponentsCardTest(){
+        Object testCPUCard = testCPU.getHand().get(1);
+        testHumanPlayer.chooseOpponentsCard(testCPU, 1);
+        assert(testHumanPlayer.getHand().contains(testCPUCard));
     }
 }
