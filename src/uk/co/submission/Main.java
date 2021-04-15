@@ -1,9 +1,6 @@
 package uk.co.submission;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 public class Main {
@@ -26,6 +23,11 @@ public class Main {
             }
         }
 
+        return cardDeck;
+    }
+
+    public static List shuffleDeck(List cardDeck){
+        Collections.shuffle(cardDeck);
         return cardDeck;
     }
 
