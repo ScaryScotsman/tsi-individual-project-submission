@@ -1,8 +1,6 @@
 package uk.co.submission;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class Player {
@@ -41,22 +39,26 @@ public class Player {
                 for (int j = 0; j < this.hand.size(); j++) {
                     if ((this.hand.get(i).toString().charAt(1) == this.hand.get(j).toString().charAt(1))
                             && (this.hand.get(i).toString().charAt(0) != this.hand.get(j).toString().charAt(0))) {
-                        System.out.println(this.hand.get(i));
-                        System.out.println(this.hand.get(j));
                         cardPair.add(this.hand.get(i));
                         cardPair.add(this.hand.get(j));
                         break comparehand;
                     }
                 }
             }
-        }        
-        this.hand.removeAll(cardPair);
-        
+        }
+
+        if (cardPair.isEmpty()){
+            System.out.println("There's no current pairs to play");
+        }
+        else{
+            this.hand.removeAll(cardPair);
+        }
+
         return this.hand;
     }
 
-    public String viewOpponentsHand(Player oppenent){
-        String message = String.format("%s currently has %s cards.", oppenent.getName(), oppenent.getHand().size());
+    public String viewOpponentsHand(Player opponent){
+        String message = String.format("%s currently has %s cards.", opponent.getName(), opponent.getHand().size());
         return message;
     }
 

@@ -67,7 +67,13 @@ class MainTests{
 
     @Test
     void playPairTest(){
-        assertEquals(testComparisonHand, testHumanPlayer.playPair());
+        testHumanPlayer.playPair();
+        assertEquals(testComparisonHand, testHumanPlayer.getHand());
+    }
+
+    @Test
+    void noAvailablePairsTest(){
+        //TODO create test for when there's no available tests
     }
 
     @Test
