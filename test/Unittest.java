@@ -10,7 +10,7 @@ import uk.co.submission.Player;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
-class MainTests{
+class Unittest {
     public static final int testNoOfPlayers = 4;
     public static final int testCardDeckSize = 56;
     public static final int testCardDeckSizeAfterRemovalOfQueen = 53;

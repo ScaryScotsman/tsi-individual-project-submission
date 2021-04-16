@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CommonMethods {
-    public static final String gameRulesPath = "C:/Users/mcgra/Downloads/scabby-queen-rules.txt";
+    public static final String gameRulesPath = "scabby-queen-rules.txt";
 
     public static int stringCount(String someString, char someChar){
         int count = 0;
