@@ -9,18 +9,23 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTests{
-    public static final int testNoOfPlayers = 2;
+    public static final int testNoOfPlayers = 4;
     public static final int testCardDeckSize = 56;
     public static final int testCardDeckSizeAfterRemovalOfQueen = 53;
 
-    private List testCardDeck =  Main.generateDeck();
+    private List testCardDeck;
     private Player testHumanPlayer = new Player("Ripley");
     private Player testCPU = new Player("Bishop");
     private List testHand = new ArrayList();
     private List testComparisonHand = new ArrayList();
+    private double testCardsToBeDealt;
 
     @BeforeEach
     void setUp() {
+        testCardDeck =  Main.generateDeck();
+        Main.removeQueens(testCardDeck);
+        testCardsToBeDealt = Math.floor(testCardDeck.size() / testNoOfPlayers);
+
         testHand.add("H6");
         testHand.add("D8");
         testHand.add("DQ");
@@ -50,10 +55,8 @@ class MainTests{
 
     @Test
     void dealHandTest(){
-        testCardDeck = Main.removeQueens(testCardDeck);
-
-        Main.dealHand(testHumanPlayer, testCardDeck, (testCardDeck.size() / testNoOfPlayers));
-
+        Main.dealHand(testHumanPlayer, testCardDeck, (int)testCardsToBeDealt);
+        System.out.println(testCardsToBeDealt);
         assertEquals((testCardDeckSizeAfterRemovalOfQueen/ testNoOfPlayers), testHumanPlayer.getHand().size());
     }
 

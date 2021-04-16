@@ -1,15 +1,37 @@
 package uk.co.submission;
 
 import java.util.*;
-
+import java.util.Scanner;
 
 public class Main {
-    public static final int noOfPlayers = 2;
+    public static int noOfPlayers = 2;
 
     public static void main(String[] args) {
-        // write your code here
-        List cardDeck = generateDeck();
+        Scanner reader = new Scanner(System.in);
+        List listOfPlayers = new ArrayList();
+        List cardDeck;
+        int cardsToBeDealt;
+
+        cardDeck = generateDeck();
+        shuffleDeck(cardDeck);
         removeQueens(cardDeck);
+
+        System.out.println("How many players are there? 1 - 3");
+        noOfPlayers = reader.nextInt() + 1;
+        cardsToBeDealt = cardDeck.size() / noOfPlayers;
+
+        for(int i = 1; i < noOfPlayers ; i++) {
+            System.out.println("What's your name? ");
+            Player humanPlayer = new Player(reader.next());
+
+            listOfPlayers.add(humanPlayer);
+            dealHand(humanPlayer, cardDeck, cardsToBeDealt);
+        }
+
+        Player cpuPlayer = new Player("Bishop");
+        dealHand(cpuPlayer, cardDeck, cardsToBeDealt + 1);
+
+        reader.close();
     }
 
     public static List generateDeck(){
@@ -47,11 +69,13 @@ public class Main {
 
         Random rand = new Random();
         int intRandom;
+
         List playerHand = new ArrayList<String>();
 
         for (int j = 0; j < cardsToBeDealt; j++) {
             intRandom = rand.nextInt(cardDeck.size());
             playerHand.add(cardDeck.get(intRandom));
+            cardDeck.remove(intRandom);
         }
 
         player.setHand(playerHand);
