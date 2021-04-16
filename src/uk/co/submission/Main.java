@@ -1,27 +1,31 @@
 package uk.co.submission;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner reader = new Scanner(System.in);
-        List listOfPlayers = new ArrayList();
+    public static void main(String[] args) throws FileNotFoundException {
+
+        System.out.println(CommonMethods.readFile(CommonMethods.gameRulesPath));
+
         List cardDeck;
-        int cardsToBeDealt;
-        int noOfPlayers;
-        int roundCounter = 1;
-        String playerSelection;
-        boolean gameloop = true;
-        boolean roundLoop;
 
         cardDeck = generateDeck();
         shuffleDeck(cardDeck);
         removeQueens(cardDeck);
 
+        Scanner reader = new Scanner(System.in);
+        String playerSelection;
+
+        int noOfPlayers;
+        int cardsToBeDealt;
+
         System.out.println("How many players are there? 1 - 3 ");
         noOfPlayers = reader.nextInt() + 1;
         cardsToBeDealt = cardDeck.size() / noOfPlayers;
+
+        List listOfPlayers = new ArrayList();
 
         for(int i = 1; i < noOfPlayers ; i++) {
             System.out.println("What's your name? ");
@@ -34,6 +38,10 @@ public class Main {
         Player cpuPlayer = new Player("Bishop");
         listOfPlayers.add(cpuPlayer);
         dealHand(cpuPlayer, cardDeck, cardsToBeDealt + 1);
+
+        boolean gameloop = true;
+        boolean roundLoop;
+        int roundCounter = 1;
 
         while(gameloop) {
             for(int i = 0; i < listOfPlayers.size() ; i++) {
@@ -142,6 +150,7 @@ public class Main {
                     cardDeckIterator.remove();
                 }
         }
+
         return cardDeck;
     }
 

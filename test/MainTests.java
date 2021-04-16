@@ -3,6 +3,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import uk.co.submission.CommonMethods;
 import uk.co.submission.Main;
+
+import java.io.FileNotFoundException;
 import java.util.List;
 import uk.co.submission.Player;
 import java.util.ArrayList;
@@ -72,11 +74,6 @@ class MainTests{
     }
 
     @Test
-    void noAvailablePairsTest(){
-        //TODO create test for when there's no available tests
-    }
-
-    @Test
     void viewOtherPlayersHandTest(){
         assertEquals("Bishop currently has 2 cards.",testHumanPlayer.viewOpponentsHand(testCPU));
     }
@@ -86,5 +83,15 @@ class MainTests{
         Object testCPUCard = testCPU.getHand().get(1);
         testHumanPlayer.chooseOpponentsCard(testCPU, 1);
         assert(testHumanPlayer.getHand().contains(testCPUCard));
+    }
+
+    @Test
+    void readFromFileTest(){
+        try{
+            assertFalse(CommonMethods.readFile(CommonMethods.gameRulesPath).isEmpty());
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,8 +1,13 @@
 package uk.co.submission;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Scanner;
 
 public class CommonMethods {
+    public static final String gameRulesPath = "C:/Users/mcgra/Downloads/scabby-queen-rules.txt";
+
     public static int stringCount(String someString, char someChar){
         int count = 0;
 
@@ -24,5 +29,14 @@ public class CommonMethods {
 
             System.out.println(String.format("%s %s", i, playerI.getName()));
         }
+    }
+
+    public static String readFile(String filePath) throws FileNotFoundException {
+        Scanner fileReader = new Scanner(new File(filePath));
+        String fileData = "";
+        while(fileReader.hasNextLine()){
+            fileData += fileReader.nextLine()  + "\n";
+        }
+        return fileData;
     }
 }
